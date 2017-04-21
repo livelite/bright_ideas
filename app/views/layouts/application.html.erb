@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RailsBelt</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if logged_in %>
+    	<h3>Hi <%= current_user.name %>!</h3>
+    	<a class="header_link" href="/logout">logout</a>
+    	<a class="header_link" href="/ideas">Bright Ideas</a>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

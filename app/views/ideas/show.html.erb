@@ -1,0 +1,21 @@
+<div>
+	<%= @idea.user.name %> says:
+	<p><%= @idea.idea %></p>
+</div>
+
+<p>
+	People who like this post:
+</p>
+
+<table>
+	<tr>
+		<th>Alias</th>
+		<th>Name</th>
+	</tr>
+	<% @idea.users.each do |user| %>
+		<tr>
+			<td><a href="/users/<%= user.id %>"><%= user.alias %></a></td>
+			<td><%= user.name %></td>
+		</tr>
+	<% end %>
+</table>

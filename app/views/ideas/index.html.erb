@@ -1,0 +1,32 @@
+<div>
+	<form action="/ideas" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<input type="text" placeholder="Post something witty here..." name="idea[idea]" style="width: 300px">
+		<input type="submit" value="Idea!">
+	</form>
+	<div>
+		<% if flash[:form_errors] %>
+			<% flash[:form_errors].each do |error| %>
+				<p class="error"><%= error %></p>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+
+<div>
+	<% @ideas.each do |idea| %>
+		<div>
+			<%= idea.user.name %> says:
+			<p><%= idea.idea %></p>
+			<% if idea.users.include? current_user %>
+				<a href="/likes/<%= idea.id %>" data-method="delete">Unike</a>
+			<% else %>
+				<a href="/likes/<%= idea.id %>" data-method="post">Like</a>
+			<% end %>
+			 | <a href="/ideas/<%= idea.id %>"><%= idea.likes.count %> people</a> like this
+			 <% if idea.user == current_user %>
+			 	| <a href="/ideas/<%= idea.id %>" data-method="delete">delete</a>
+			 <% end %>
+		</div>
+	<% end %>
+</div>
